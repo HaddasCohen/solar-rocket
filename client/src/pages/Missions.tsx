@@ -32,6 +32,7 @@ import {
   Sort as SortIcon,
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
+  ContactSupport,
 } from "@mui/icons-material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -56,6 +57,7 @@ const getMissions = async (
     Missions(
       sort: {
         field: ${sortField}
+        desc: ${sortDesc}
       }
     ) {
       id
@@ -105,7 +107,7 @@ const Missions = (): JSX.Element => {
   };
 
   useEffect(() => {
-    getMissions(sortField)
+    getMissions(sortField, sortDesc)
       .then((result: MissionsResponse) => {
         setMissions(result.data.Missions);
       })
@@ -113,7 +115,7 @@ const Missions = (): JSX.Element => {
         setErrMessage("Failed to load missions.");
         console.log(err);
       });
-  }, [sortField]);
+  }, [sortField, sortDesc]);
 
   return (
     <AppLayout title="Missions">
