@@ -17,6 +17,7 @@ const Weather = (): JSX.Element => {
   const [city,setCity] = useState<string>("Jerusalem");
   const [errMessage, setErrMessage] = useState<string | null>(null);
   const [weathers, setWeathers] = useState<WeatherType | null>();
+  let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Sabbath']; 
     
   const handleErrClose = (event?: SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") return;
@@ -46,8 +47,8 @@ const Weather = (): JSX.Element => {
               <Grid item key={key}>
                 <Card sx={{ width: 275, height: 280, textAlign: "center"}}>
                   <CardHeader
-                    title={"Forecast"}
-                    subheader={new Date(forecastday.date).toDateString()}
+                    title={days[new Date(forecastday.date).getDay()]}
+                    subheader={new Date(forecastday.date).toDateString().substring(4)}
                   />
                   <CardContent>
                     <Typography noWrap>
